@@ -1,0 +1,105 @@
+
+  .btn-custom-taxi {
+    background: linear-gradient(135deg, #28a745, #218838);
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 30px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+  }
+
+  .btn-custom-taxi:hover {
+    background: linear-gradient(135deg, #218838, #1e7e34);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(40, 167, 69, 0.5);
+  }
+
+  .btn-custom-review {
+    background: linear-gradient(135deg, #ffc107, #e0a800);
+    border: none;
+    color: #212529;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 30px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(255, 193, 7, 0.3);
+  }
+
+  .btn-custom-review:hover {
+    background: linear-gradient(135deg, #e0a800, #d39e00);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(255, 193, 7, 0.5);
+  }
+
+.mapa-container {
+  display: flex;
+  justify-content: center;
+ 
+}
+
+
+.header-container{
+  position: relative;
+  background: #0f130c;
+  z-index: 1;
+}
+
+
+#derecha{
+  display: flex;
+  justify-content: end;
+}
+
+ 
+    .form-container {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+  
+      margin: auto;
+    }
+
+
+#bottonn{
+  max-width: 100px;
+  margin: auto;
+}
+
+
+
+ .carousel-item {
+      height: 400px;
+    }
+    .carousel-item img {
+      height: 100%;
+      object-fit: cover;
+    }
+    .text-shadow {
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+    }
+    .carousel-caption {
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 10px;
+      padding: 15px;
+    }
+ 
+
+footer {
+  background-color: #212529;
+  color: white;
+  padding: 50px 0;
+}
+
+
+#footer-redes a {
+  color: white;
+  margin-right: 10px;
+  
+  text-decoration: none;
+}

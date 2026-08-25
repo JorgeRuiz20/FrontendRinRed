@@ -1,0 +1,58 @@
+.profile-section {
+  background-image: url("../img/img1.jpeg");
+  background-size: cover;
+  background-position: center;
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding: 50px;
+ 
+}
+/* Reducir espacio entre imagen y estrellas */
+.profile-card img {
+  margin-bottom: 5px; /* de 10px a 5px */
+}
+
+.profile-card img {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto 10px auto; /* ajusta el espacio inferior aquí */
+  border-radius: 10px;
+}
+
+.stars {
+  margin-bottom: 5px; /* o menos si deseas */
+  text-align: center;
+}
+
+.profile-data {
+  padding: 10px;
+  margin-top: 0; /* asegúrate que no hay espacio de más */
+  text-align: left;
+  padding-top: 0;
+}
+
+
+footer {
+  background-color: #212529;
+  color: white;
+  padding: 50px 0;
+}
+
+
+#footer-redes a {
+  color: white;
+  margin-right: 10px;
+ 
+  text-decoration: none;
+}
+@media (max-width: 768px) {
+  .profile-section {
+    gap: 10px; /* antes era 30px */
+  }
+}
+

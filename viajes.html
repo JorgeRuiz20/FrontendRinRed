@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Formulario Taxi</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/viajes.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+
+ 
+</head>
+<body>
+ 
+
+<header>
+  <div class="container-fluid header-container py-2 bg-dark">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-6 col-lg-4">
+          <a href="index.html"><img src="img/logo.png" alt="Logo" height="40"></a>
+        </div>
+
+        <div class="col-6 d-lg-none text-end">
+          <!-- Botón hamburguesa para móviles -->
+          <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#mobileMenu" aria-controls="mobileMenu" aria-expanded="false" aria-label="Toggle navigation">
+            ☰
+          </button>
+        </div>
+
+        <!-- Menú colapsable en móviles -->
+        <div class="collapse col-12 d-lg-none mt-2" id="mobileMenu">
+          <ul class="nav flex-column text-center">
+            <li class="nav-item"><a class="nav-link text-white" href="index.html">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="#">Servicios</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="#">Proyectos</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="#">Equipo</a></li>
+            <li class="nav-item"><a class="nav-link text-white bg-secondary px-3 py-1 rounded d-inline-block mt-2" href="#">Contáctanos</a></li>
+          </ul>
+        </div>
+
+        <!-- Menú normal en escritorio -->
+        <div class="col-lg-8 d-none d-lg-flex justify-content-between align-items-center">
+          <nav>
+            <ul class="nav justify-content-center">
+              <li class="nav-item"><a class="nav-link text-white" href="index.html">Inicio</a></li>
+              <li class="nav-item"><a class="nav-link text-white" href="#">Servicios</a></li>
+              <li class="nav-item"><a class="nav-link text-white" href="#">Proyectos</a></li>
+              <li class="nav-item"><a class="nav-link text-white" href="#">Equipo</a></li>
+            </ul>
+          </nav>
+          <a class="nav-link text-white bg-secondary px-3 py-1 rounded" href="#">Contáctanos</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="container my-4" id="formulario-dni">
+  <div class="card p-4">
+    <h5>Consulta tus viajes</h5>
+    <form id="dniForm" class="row g-3">
+      <div class="col-md-6">
+        <label for="dniInput" class="form-label">Ingresa tu DNI</label>
+        <input type="text" class="form-control" id="dniInput" required>
+      </div>
+      <div class="col-md-6 d-flex align-items-end">
+        <button type="submit" class="btn btn-primary w-100">Ver mis viajes</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+
+  <section class="viajes container my-5">
+    <h3 class="mb-4">Viajes en transcurso</h3>
+    <div id="pendientes-container"></div>
+  </section>
+
+  <section class="viajes-finalizados container my-5">
+    <h3 class="mb-4">Viajes Finalizados</h3>
+    <div id="finalizados-container"></div>
+  </section>
+
+  <!-- Footer igual que en tu versión -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/api.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const dniInput = document.getElementById('dniInput');
+    const dniForm = document.getElementById('dniForm');
+
+    // Limpiar campo DNI al cargar
+    dniInput.value = '';
+
+    dniForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const dni = dniInput.value.trim();
+
+      if (!/^\d{8}$/.test(dni)) {
+        alert("❌ El DNI debe tener 8 dígitos numéricos");
+        return;
+      }
+
+      try {
+        await cargarViajes(dni);
+      } catch (error) {
+        mostrarErrorEnContenedor('pendientes-container', error);
+      }
+    });
+  });
+
+  async function cargarViajes(dni) {
+    try {
+      // Mostrar carga
+      mostrarCargaEnContenedor('pendientes-container');
+      mostrarCargaEnContenedor('finalizados-container');
+
+      const [pendientes, finalizados] = await Promise.all([
+        obtenerViajesPendientes(dni),
+        obtenerViajesFinalizados(dni)
+      ]);
+
+      renderizarViajes(pendientes, 'pendientes-container', true);
+      renderizarViajes(finalizados, 'finalizados-container', false);
+
+    } catch (error) {
+      mostrarErrorEnContenedor('pendientes-container', error);
+    }
+  }
+
+  function renderizarViajes(viajes, containerId, sonPendientes) {
+    const contenedor = document.getElementById(containerId);
+    contenedor.innerHTML = '';
+
+    if (!viajes || viajes.length === 0) {
+      contenedor.innerHTML = `
+        <div class="alert alert-info">
+          No hay viajes ${sonPendientes ? 'pendientes' : 'finalizados'}
+        </div>`;
+      return;
+    }
+
+    viajes.forEach(viaje => {
+      const tarjetaViaje = document.createElement('div');
+      tarjetaViaje.className = 'card mb-3';
+      tarjetaViaje.id = `viaje-${viaje.id}`;
+      
+      tarjetaViaje.innerHTML = `
+        <div class="card-body">
+          <h5 class="card-title">Viaje #${viaje.id}</h5>
+          <p><strong>Destino:</strong> ${viaje.direccionActual}</p>
+          <p><strong>Conductor:</strong> ${viaje.conductor.nombre}</p>
+          <p><strong>Teléfono:</strong> ${viaje.conductor.numero}</p>
+          
+          ${sonPendientes ? `
+            <div class="mt-3">
+              <a href="info.html?conductorId=${viaje.conductor.id}" 
+                 class="btn btn-info btn-sm me-2">
+                <i class="bi bi-info-circle"></i> Detalles
+              </a>
+              <button class="btn btn-danger btn-sm btn-cancelar" 
+                      data-viaje-id="${viaje.id}">
+                <i class="bi bi-x-circle"></i> Cancelar
+              </button>
+            </div>
+          ` : `
+            <span class="badge bg-success">${viaje.estado}</span>
+          `}
+        </div>`;
+
+      contenedor.appendChild(tarjetaViaje);
+    });
+
+    // Agregar eventos a los botones de cancelar
+    document.querySelectorAll('.btn-cancelar').forEach(boton => {
+      boton.addEventListener('click', () => {
+        const idViaje = boton.getAttribute('data-viaje-id');
+        confirmarYCancelarViaje(idViaje);
+      });
+    });
+  }
+
+async function confirmarYCancelarViaje(id) {
+  if (!confirm("⚠️ ¿Estás seguro de cancelar este viaje?")) return;
+
+  const tarjeta = document.getElementById(`viaje-${id}`);
+  try {
+    // Mostrar carga
+    tarjeta.innerHTML = `
+      <div class="card-body text-center py-4">
+        <div class="spinner-border text-warning"></div>
+        <p class="mt-2">Cancelando viaje...</p>
+      </div>`;
+
+    // Llamar a la API
+    const resultado = await cancelarViaje(id);
+    console.log("Resultado:", resultado);
+
+    // Mostrar éxito (mejorado)
+    tarjeta.innerHTML = `
+      <div class="card-body text-center py-4">
+        <i class="bi bi-check-circle-fill text-success fs-3"></i>
+        <p class="mt-2 mb-0">Viaje cancelado</p>
+        <small class="text-muted">El viaje ha sido eliminado del sistema</small>
+      </div>`;
+
+    // Eliminar la tarjeta después de 2 segundos (en lugar de recargar)
+    setTimeout(() => {
+      tarjeta.style.opacity = '0';
+      setTimeout(() => tarjeta.remove(), 300);
+    }, 2000);
+
+  } catch (error) {
+    // Mostrar error mejorado
+    tarjeta.innerHTML = `
+      <div class="card-body">
+        <div class="alert alert-danger">
+          <i class="bi bi-exclamation-triangle-fill"></i>
+          <strong>Error:</strong> ${error.message || "Error al cancelar"}
+        </div>
+        <button class="btn btn-sm btn-outline-primary" onclick="location.reload()">
+          <i class="bi bi-arrow-repeat"></i> Actualizar lista
+        </button>
+      </div>`;
+  }
+}
+
+  // Funciones auxiliares
+  function mostrarCargaEnContenedor(containerId) {
+    document.getElementById(containerId).innerHTML = `
+      <div class="text-center py-4">
+        <div class="spinner-border text-primary"></div>
+        <p class="mt-2">Cargando viajes...</p>
+      </div>`;
+  }
+
+  function mostrarErrorEnContenedor(containerId, error) {
+    document.getElementById(containerId).innerHTML = `
+      <div class="alert alert-danger">
+        <i class="bi bi-exclamation-octagon-fill"></i>
+        ${error.message}
+      </div>`;
+  }
+</script>
+</body>
+</html>

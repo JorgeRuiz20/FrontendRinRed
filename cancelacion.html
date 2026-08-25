@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Cancelar Viaje</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/cancelacion.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"/>
+</head>
+<body>
+<header>
+  <div class="container-fluid header-container py-2 bg-dark">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-6 col-lg-4">
+          <a href="index.html"><img src="img/logo.png" alt="Logo" height="40"></a>
+        </div>
+
+        <div class="col-6 d-lg-none text-end">
+          <!-- Botón hamburguesa para móviles -->
+          <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#mobileMenu" aria-controls="mobileMenu" aria-expanded="false" aria-label="Toggle navigation">
+            ☰
+          </button>
+        </div>
+
+        <!-- Menú colapsable en móviles -->
+        <div class="collapse col-12 d-lg-none mt-2" id="mobileMenu">
+          <ul class="nav flex-column text-center">
+            <li class="nav-item"><a class="nav-link text-white" href="index.html">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="#">Servicios</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="#">Proyectos</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="#">Equipo</a></li>
+            <li class="nav-item"><a class="nav-link text-white bg-secondary px-3 py-1 rounded d-inline-block mt-2" href="#">Contáctanos</a></li>
+          </ul>
+        </div>
+
+        <!-- Menú normal en escritorio -->
+        <div class="col-lg-8 d-none d-lg-flex justify-content-between align-items-center">
+          <nav>
+            <ul class="nav justify-content-center">
+              <li class="nav-item"><a class="nav-link text-white" href="index.html">Inicio</a></li>
+              <li class="nav-item"><a class="nav-link text-white" href="#">Servicios</a></li>
+              <li class="nav-item"><a class="nav-link text-white" href="#">Proyectos</a></li>
+              <li class="nav-item"><a class="nav-link text-white" href="#">Equipo</a></li>
+            </ul>
+          </nav>
+          <a class="nav-link text-white bg-secondary px-3 py-1 rounded" href="#">Contáctanos</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+  <video autoplay muted loop playsinline id="video-fondo">
+      <source src="video/video.mp4" type="video/mp4" />
+      Tu navegador no soporta videos HTML5.
+    </video>
+  <section class="cancel-section py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6 cancel-card">
+          <h5 class="cancel-title mb-3">¿Por qué decidiste cancelar tu viaje?</h5>
+          <p class="cancel-subtitle">
+            Tu opinión nos ayuda a mejorar tu experiencia
+          </p>
+          <form>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="cambioPlanes"/>
+              <label class="form-check-label" for="cambioPlanes"
+                >Cambio de planes personales</label
+              >
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="salud" />
+              <label class="form-check-label" for="salud">Problemas de salud</label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="disponibilidad"
+              />
+              <label class="form-check-label" for="disponibilidad"
+                >No encontré buena disponibilidad</label
+              >
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="precioElevado"
+              />
+              <label class="form-check-label" for="precioElevado">Precio elevado</label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="problemasTecnicos"
+              />
+              <label class="form-check-label" for="problemasTecnicos"
+                >Problemas técnicos con la plataforma</label
+              >
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="mejorOpcion" />
+              <label class="form-check-label" for="mejorOpcion"
+                >Encontré una mejor opción</label
+              >
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="noEntendi" />
+              <label class="form-check-label" for="noEntendi"
+                >No entendí el proceso de reserva</label
+              >
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="otro" />
+              <label class="form-check-label" for="otro">Otro</label>
+            </div>
+            <input
+              type="text"
+              class="form-control my-3"
+              placeholder="¿Quieres contarnos algo más?"
+            />
+            <button type="submit" class="btn btn-primary w-100">
+              Enviar comentarios
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="container-fluid">
+    <div class="container">
+      <div class="row text-center text-lg-start">
+        <div class="col-12 col-lg-3 mb-4 mb-lg-0">
+          <h4>Sobre Nosotros</h4>
+          <p>
+            Somos una empresa de taxi confiable y moderna, dedicada a ofrecer
+            un servicio seguro, rápido y accesible en Cusco.
+          </p>
+        </div>
+        <div class="col-12 col-lg-3 mb-4 mb-lg-0">
+          <h4>Preguntas frecuentes</h4>
+          <ul class="list-unstyled">
+            <li>¿Cómo puedo reservar un taxi?</li>
+            <li>¿Qué métodos de pago aceptan?</li>
+            <li>¿Ofrecen servicio al aeropuerto?</li>
+          </ul>
+        </div>
+        <div class="col-12 col-lg-3 mb-4 mb-lg-0">
+          <h4>Términos y condiciones</h4>
+          <ul class="list-unstyled">
+            <li>Política de privacidad</li>
+            <li>Centro de ayuda o soporte</li>
+            <li>Contacto o ayuda</li>
+          </ul>
+        </div>
+        <div class="col-12 col-lg-3" id="footer-redes">
+          <h4>Síguenos</h4>
+          <a>📍 Cusco, Perú</a> <br>
+          <a>📞 +51 987 654 321</a><br>
+          <a>📧 contacto@rinred.com</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap 5 JS (para menú colapsable) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
