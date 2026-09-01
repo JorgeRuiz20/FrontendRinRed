@@ -149,7 +149,7 @@ document.getElementById("formSolicitud").addEventListener("submit", async (e) =>
 
   try {
     const conductorId = 1;
-    const response = await fetch(`https://rin-back.onrender.com/api/viajes?conductorId=${conductorId}`, {
+    const response = await fetch(`${BASE_URL}/viajes?conductorId=${conductorId}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(viajeData)

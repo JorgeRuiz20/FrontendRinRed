@@ -1,4 +1,4 @@
-const BASE_URL = "https://rin-back.onrender.com/api";
+const BASE_URL = "https://backendrinred.onrender.com/api";
 
 async function obtenerViajesPendientes(dni) {
   const response = await fetch(`${BASE_URL}/viajes/pendientes?dni=${dni}`);
