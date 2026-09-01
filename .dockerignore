@@ -3,5 +3,5 @@
 .vscode
 Dockerfile
 .dockerignore
-nginx.conf
+
 
